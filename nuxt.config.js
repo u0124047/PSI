@@ -20,7 +20,11 @@ export default {
       { rel: 'preconnect',href:'https://fonts.googleapis.com'},
       { rel: 'preconnect',href:'https://fonts.gstatic.com'},
       { rel: 'stylesheet',href:'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap'}
-    ]
+    ],
+    script: [
+			{ src: "https://unpkg.com/xlsx/dist/shim.min.js" },
+			{ src: "https://unpkg.com/xlsx/dist/xlsx.full.min.js" }
+		]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

@@ -71,7 +71,7 @@
           <a class="nav-link" href="#" :class="{ 'active' : visibility == 2 }" @click="visibility = 2">佳佳進貨</a>
         </li>
         <li>
-          <button class="btn btn-primary" type="button" @click="exportJournal(visibility)">下載</button>
+          <button class="btn btn-primary" type="button" @click="exportJournal">下載</button>
         </li>
       </ul>
     </div>
@@ -143,6 +143,7 @@ import Header from "~/components/Header.vue";
 export default {
   data() {
     return {
+      data: ["SheetJS".split(""), "1234567".split("")],
       journalYear: 110,
       journalMonth: 7,
       journalDay: null,
@@ -302,19 +303,10 @@ export default {
     removeTodo: function(key) {
       this.journals.splice(this.journals.findIndex(obj=> obj.id === key), 1);
     },
-    exportJournal: function(type) {
-      var filename = this.journalYear + "年" + this.journalMonth + "月份" + (type == 0 ? '佳佳交易明細' : type == 1 ? '佳佳廢料明細' : '佳佳進貨明細')
-      // return ExcellentExport.convert({
-      //     filename: filename,
-      //     format: 'xlsx',
-      //     openAsDownload: true
-      // }, [{
-      //     name: filename,
-      //     from: {
-      //         table: 'datatable'
-      //     },
-      //       removeColumns: [8]
-      // }]);
+    exportJournal: function() {
+      var filename = this.journalYear + "年" + this.journalMonth + "月份" + (this.visibility == 0 ? '佳佳交易明細' : this.visibility == 1 ? '佳佳廢料明細' : '佳佳進貨明細') + '.xlsx'
+    	var wb = XLSX.utils.table_to_book(document.getElementById('datatable'));
+			XLSX.writeFile(wb, filename);
     }
   },
   computed: {
