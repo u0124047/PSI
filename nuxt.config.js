@@ -29,8 +29,8 @@ export default {
       { rel: 'stylesheet',href:'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap'}
     ],
     script: [
-			{ src: "https://unpkg.com/xlsx/dist/shim.min.js" },
-			{ src: "https://unpkg.com/xlsx/dist/xlsx.full.min.js" }
+			{ src: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js" },
+			{ src: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/shim.min.js" }
 		]
   },
 
