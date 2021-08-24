@@ -62,13 +62,13 @@
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a class="nav-link" href="#" :class="{ 'active' : visibility == 0 }" @click="visibility = 0">全部</a>
+          <a class="nav-link" :class="{ 'active' : visibility == 0 }" @click="visibility = 0">全部</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="#" :class="{ 'active' : visibility == 1 }" @click="visibility = 1">佳佳廢料</a>
+          <a class="nav-link" :class="{ 'active' : visibility == 1 }" @click="visibility = 1">佳佳廢料</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" :class="{ 'active' : visibility == 2 }" @click="visibility = 2">佳佳進貨</a>
+          <a class="nav-link" :class="{ 'active' : visibility == 2 }" @click="visibility = 2">佳佳進貨</a>
         </li>
         <li>
           <button class="btn btn-primary" type="button" @click="exportJournal">下載</button>
