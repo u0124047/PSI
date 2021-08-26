@@ -22,11 +22,13 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: './favicon.ico' },
       { rel: 'preconnect',href:'https://fonts.googleapis.com'},
       { rel: 'preconnect',href:'https://fonts.gstatic.com'},
       { rel: 'stylesheet',href:'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap'}
+    ],
+    plugins: [
+      '~/plugins/firebase'
     ],
     script: [
 			{ src: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js" },
@@ -40,6 +42,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/firebase'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -51,9 +54,33 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    
   ],
+  
+  env: {
+    APIKEY: process.env.APIKEY,
+    AUTHDOMAIN: process.env.AUTHDOMAIN,
+    DATABASEURL: process.env.DATABASEURL,
+    PROJECTID: process.env.PROJECTID,
+    STORAGEBUCKET: process.env.STORAGEBUCKET,
+    MESSAGINGSENDERID: process.env.MESSAGINGSENDERID,
+    APPID: process.env.APPID
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    babel: {
+      presets({ isServer }) {
+        return [
+          [
+            require.resolve('@nuxt/babel-preset-app'),
+            {
+              buildTarget: isServer ? 'server' : 'client',
+              corejs: { version: 3 }
+            }
+          ]
+        ]
+      }
+    }
   }
 }

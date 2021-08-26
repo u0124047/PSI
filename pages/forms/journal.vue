@@ -139,115 +139,20 @@
 </template>
 
 <script>
+import {db} from '~/plugins/firebase.js'
 import Header from "~/components/Header.vue";
 export default {
+  head(){
+    return{
+      title: '日記帳'
+    }
+  },
   data() {
     return {
-      data: ["SheetJS".split(""), "1234567".split("")],
       journalYear: 110,
       journalMonth: 7,
       journalDay: null,
-      journals: [
-        {
-          id: "1",
-          date: "07/02",
-          title: "廢料",
-          num: 2110.0,
-          unit: "KG",
-          unitPrice: 13.5,
-          amount: 28485.0,
-          type: 1,
-          CD: "C",
-        },
-        {
-          id: "2",
-          date: "07/20",
-          title: "廢料",
-          num: 1560.0,
-          unit: "KG",
-          unitPrice: 13.5,
-          amount: 21060.0,
-          type: 1,
-          CD: "C",
-        },
-        {
-          id: "3",
-          date: "07/27",
-          title: "廢料",
-          num: 1440.0,
-          unit: "KG",
-          unitPrice: 13.5,
-          amount: 19440.0,
-          type: 1,
-          CD: "C",
-        },
-        {
-          id: "4",
-          date: "07/06",
-          title: "垃圾袋",
-          num: 1,
-          unit: "",
-          unitPrice: 950.0,
-          amount: 950,
-          type: 2,
-          CD: "C",
-        },
-        {
-          id: "5",
-          date: "07/06",
-          title: "色料",
-          num: 6000,
-          unit: "KG",
-          unitPrice: 23.0,
-          amount: 138000.0,
-          type: 2,
-          CD: "D",
-        },
-        {
-          id: "6",
-          date: "07/16",
-          title: "大白料",
-          num: 3000,
-          unit: "KG",
-          unitPrice: 23.0,
-          amount: 69000.0,
-          type: 2,
-          CD: "D",
-        },
-        {
-          id: "7",
-          date: "07/19",
-          title: "色料",
-          num: 6225,
-          unit: "KG",
-          unitPrice: 23.0,
-          amount: 143175.0,
-          type: 2,
-          CD: "D",
-        },
-        {
-          id: "8",
-          date: "07/26",
-          title: "垃圾袋",
-          num: 1,
-          unit: "",
-          unitPrice: 950.0,
-          amount: 950,
-          type: 2,
-          CD: "C",
-        },
-        {
-          id: "9",
-          date: "07/30",
-          title: "大白料",
-          num: 2000,
-          unit: "KG",
-          unitPrice: 23.0,
-          amount: 46000.0,
-          type: 2,
-          CD: "D",
-        },
-      ],
+      journals: [],
       tempJournal: {
         id: "",
         date: "",
@@ -288,6 +193,7 @@ export default {
         console.log(this.tempJournal)
         this.journals.push(this.tempJournal);
            this.journals.splice();
+        db.ref("Journals").push(this.tempJournal);
         this.tempJournal = {
             id: '',
             date: '',
@@ -309,6 +215,17 @@ export default {
 			XLSX.writeFile(wb, filename);
     }
   },
+  async fetch() {
+    var ref = db.ref("Journals");
+    this.journals = await ref.once('value', function(snapshot) {
+      var journal = [];
+      snapshot.forEach(function(item) {             
+        journal.push(item.val());
+        journal.splice();
+      })
+      return journal
+    })
+  },
   computed: {
     jurnalAmount: function() {
         let amount = this.tempJournal.num * this.tempJournal.unitPrice;
@@ -316,22 +233,22 @@ export default {
         return amount;
     },
     subTotalOfDebit: function() {
-      return this.filterJournals.filter(item => item.CD=='D').reduce((sum, item) => sum + item.amount, 0.0);
+      return Object.values(this.filterJournals).filter(item => item.CD=='D').reduce((sum, item) => sum + item.amount, 0.0);
     },
     subTotalOfCredit: function() {
-      return this.filterJournals.filter(item => item.CD=='C').reduce((sum, item) => sum + item.amount, 0.0);
+      return Object.values(this.filterJournals).filter(item => item.CD=='C').reduce((sum, item) => sum + item.amount, 0.0);
     },
     total: function() {
-      return this.filterJournals.filter(item => item.CD=='D').reduce((sum, item) => sum + item.amount, 0.0)-this.filterJournals.filter(item => item.CD=='C').reduce((sum, item) => sum + item.amount, 0.0);
+      return this.subTotalOfDebit - this.subTotalOfCredit;
     },
     filterJournals: function() {
         switch (this.visibility) {
-            case 1:
-            return this.journals.filter(item => item.type == 1)
-            case 2:
-            return this.journals.filter(item => item.type == 2)
-            default:
-            return this.journals
+          case 1:
+            return Object.values(this.journals).filter(item => item.type == 1)
+          case 2:
+            return Object.values(this.journals).filter(item => item.type == 2)
+          default:
+            return Object.values(this.journals)
         }
     }
   }
