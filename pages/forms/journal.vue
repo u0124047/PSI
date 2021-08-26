@@ -92,7 +92,7 @@
             <th>買入</th>
             <th></th>
           </tr>
-          <tr v-for="(item, index) in filterJournals" :key="index">
+          <tr v-for="(item, index) in journalsDict" :key="index">
             <td>{{index+1}}</td>
             <td>{{item.date}}</td>
             <td>{{item.title}}</td>
@@ -139,14 +139,20 @@
 </template>
 
 <script>
+import {db} from '~/plugins/firebase.js'
 import Header from "~/components/Header.vue";
 export default {
+  head(){
+    return{
+      title: '日記帳'
+    }
+  },
   data() {
     return {
-      data: ["SheetJS".split(""), "1234567".split("")],
       journalYear: 110,
       journalMonth: 7,
       journalDay: null,
+      journalsDict: [],
       journals: [
         {
           id: "1",
@@ -288,6 +294,7 @@ export default {
         console.log(this.tempJournal)
         this.journals.push(this.tempJournal);
            this.journals.splice();
+        db.ref("Journals").push(this.tempJournal);
         this.tempJournal = {
             id: '',
             date: '',
@@ -308,6 +315,17 @@ export default {
     	var wb = XLSX.utils.table_to_book(document.getElementById('datatable'));
 			XLSX.writeFile(wb, filename);
     }
+  },
+  async fetch() {
+    var ref = db.ref("Journals");
+    this.journalsDict = await ref.once('value', function(snapshot) {
+      var journal = [];
+      snapshot.forEach(function(item) {             
+        journal.push(item.val());
+        journal.splice();
+      })
+      return journal
+    })
   },
   computed: {
     jurnalAmount: function() {
