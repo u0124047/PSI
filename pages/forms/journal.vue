@@ -16,6 +16,7 @@
     <option value=2>2月份</option>
     <option value=1>1月份</option>
   </select>
+  <button class="btn btn-primary" type="button" @click="refreshJournals">查詢</button>
 
   <div class="input-group mb-3">
     <div>
@@ -23,23 +24,16 @@
         <thead>
           <tr>
             <th style="width: 10%;">日</th>
-            <th style="width: 15%;">買賣</th>
-            <th style="width: 15%;">進銷</th>
             <th style="width: 15%;">品名</th>
             <th style="width: 15%;">數量</th>
             <th style="width: 15%;">單位</th>
             <th style="width: 15%;">單價</th>
+            <th style="width: 15%;">買賣</th>
             <th style="width: 15%;">金額</th>
             <th style="width: 5%;"></th>
           </tr>     
           <tr>
             <td><input type="text" class="form-control" placeholder="日" v-model="journalDay"></td>
-            <td><select id="selectCD" class="form-control" v-model="tempJournal.CD" value="tempJournal.CD" >
-              <option value="D">賣出</option>
-              <option selected="selected" value="C">買入</option></select></td>
-            <td><select id="selectType" class="form-control" v-model="tempJournal.type" value="tempJournal.type">
-                <option selected="selected" value=1>廢料</option>
-                <option value=2>進貨</option></select></td>
             <td><select id="selectTitle" class="form-control" v-model="tempJournal.title" value="tempJournal.title">
                 <option selected="selected" value="廢料">廢料</option>
                 <option value="大白料">大白料</option>
@@ -49,6 +43,9 @@
             <td><select id="selectUnit" class="form-control" v-model="tempJournal.unit" value="KG">
                 <option selected="selected" value="KG">KG</option></select></td>
             <td><input type="text" class="form-control" placeholder="單價" v-model="tempJournal.unitPrice"></td>
+            <td><select id="selectCD" class="form-control" v-model="tempJournal.CD" value="tempJournal.CD" >
+              <option value="D">賣出</option>
+              <option selected="selected" value="C">買入</option></select></td>
             <td>{{jurnalAmount | currency }}</td>
             <td><div class="input-group-append">
                 <button class="btn btn-primary" type="button" @click="addJournal">新增</button>
@@ -150,9 +147,10 @@ export default {
   },
   data() {
     return {
+      baseUrl: 'https://purchasesalesinventory-default-rtdb.asia-southeast1.firebasedatabase.app/Journals/',
       journalYear: 110,
       journalMonth: 7,
-      journalDay: 9,
+      journalDay: null,
       journals: [],
       tempJournal: {
         id: "",
@@ -190,11 +188,12 @@ export default {
             return alert('請輸入單價');
         }
         this.tempJournal.date = this.journalMonth + "/" + this.journalDay;
+        this.tempJournal.type = this.tempJournal.title == '廢料' ? 1 : 2
         console.log(this.tempJournal)
-        var newChildRef = db.ref("Journals").push(this.tempJournal);
-        if (newChildRef.key != "") {
-          alert('建立成功');
-        }
+        var newChildRef = db.ref("Journals").child(this.journalYear).child(this.journalMonth).push(this.tempJournal);
+        // if (newChildRef.key != "") {
+        //   alert('建立成功');
+        // }
         this.tempJournal.id = newChildRef.key;
         this.journals.push(this.tempJournal);
         this.journals.splice();
@@ -204,7 +203,7 @@ export default {
             title: this.tempJournal.title,
             num: 0.0,
             unit: 'KG',
-            unitPrice: 0.0,
+            unitPrice: this.tempJournal.unitPrice,
             amount: 0.0,
             type: this.tempJournal.type,
             CD: this.tempJournal.CD
@@ -212,31 +211,31 @@ export default {
     },
     removeTodo: function(key) {
       this.journals.splice(this.journals.findIndex(obj=> obj.id === key), 1);
-      db.ref("Journals").child(key).remove();
+      db.ref("Journals").child(this.journalYear).child(this.journalMonth).child(key).remove();
     },
     exportJournal: function() {
       var filename = this.journalYear + "年" + this.journalMonth + "月份" + (this.visibility == 0 ? '佳佳交易明細' : this.visibility == 1 ? '佳佳廢料明細' : '佳佳進貨明細') + '.xlsx'
     	var wb = XLSX.utils.table_to_book(document.getElementById('datatable'));
 			XLSX.writeFile(wb, filename);
+    },
+    refreshJournals: function() {
+      var url = this.baseUrl+this.journalYear+'/'+this.journalMonth+'.json';    
+        const res = axios.get(url).then((res)=>{
+          var _journals = []; 
+          for (var prop in res.data) {
+            var journalObj = res.data[prop]
+            journalObj.id = prop
+            _journals.push(journalObj);
+            _journals.splice();
+          } 
+          this.journals = _journals
+        }).catch((error)=>{
+          console.log('error',error)
+        })  
     }
   },
-  async asyncData(journals){
-  try {
-      const res = await axios.get('https://purchasesalesinventory-default-rtdb.asia-southeast1.firebasedatabase.app/Journals.json');
-      var _journals = []; 
-       
-      for (var prop in res.data) {
-        var journalObj = res.data[prop]
-        journalObj.id = prop
-        _journals.push(journalObj);
-        _journals.splice();
-      }   
-      return {
-        journals: _journals
-      };
-    } catch(e) {
-      return journals.error(e);
-    }
+  created() {
+    this.refreshJournals()
   },
   // async fetch() {
   //   var ref = db.ref("Journals");
