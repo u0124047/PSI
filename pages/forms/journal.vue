@@ -141,6 +141,7 @@
 <script>
 import {db} from '~/plugins/firebase.js'
 import Header from "~/components/Header.vue";
+import axios from 'axios'
 export default {
   head(){
     return{
@@ -151,7 +152,7 @@ export default {
     return {
       journalYear: 110,
       journalMonth: 7,
-      journalDay: null,
+      journalDay: 9,
       journals: [],
       tempJournal: {
         id: "",
@@ -188,12 +189,15 @@ export default {
         } else if (!this.tempJournal.unitPrice) {
             return alert('請輸入單價');
         }
-        this.tempJournal.id = this.journals.length + 2;
         this.tempJournal.date = this.journalMonth + "/" + this.journalDay;
         console.log(this.tempJournal)
+        var newChildRef = db.ref("Journals").push(this.tempJournal);
+        if (newChildRef.key != "") {
+          alert('建立成功');
+        }
+        this.tempJournal.id = newChildRef.key;
         this.journals.push(this.tempJournal);
-           this.journals.splice();
-        db.ref("Journals").push(this.tempJournal);
+        this.journals.splice();
         this.tempJournal = {
             id: '',
             date: '',
@@ -208,6 +212,7 @@ export default {
     },
     removeTodo: function(key) {
       this.journals.splice(this.journals.findIndex(obj=> obj.id === key), 1);
+      db.ref("Journals").child(key).remove();
     },
     exportJournal: function() {
       var filename = this.journalYear + "年" + this.journalMonth + "月份" + (this.visibility == 0 ? '佳佳交易明細' : this.visibility == 1 ? '佳佳廢料明細' : '佳佳進貨明細') + '.xlsx'
@@ -215,17 +220,35 @@ export default {
 			XLSX.writeFile(wb, filename);
     }
   },
-  async fetch() {
-    var ref = db.ref("Journals");
-    this.journals = await ref.once('value', function(snapshot) {
-      var journal = [];
-      snapshot.forEach(function(item) {             
-        journal.push(item.val());
-        journal.splice();
-      })
-      return journal
-    })
+  async asyncData(journals){
+  try {
+      const res = await axios.get('https://purchasesalesinventory-default-rtdb.asia-southeast1.firebasedatabase.app/Journals.json');
+      var _journals = []; 
+       
+      for (var prop in res.data) {
+        var journalObj = res.data[prop]
+        journalObj.id = prop
+        _journals.push(journalObj);
+        _journals.splice();
+      }   
+      return {
+        journals: _journals
+      };
+    } catch(e) {
+      return journals.error(e);
+    }
   },
+  // async fetch() {
+  //   var ref = db.ref("Journals");
+  //   this.journals = await ref.once('value', function(snapshot) {
+  //     var journal = [];
+  //     snapshot.forEach(function(item) {             
+  //       journal.push(item.val());
+  //       journal.splice();
+  //     })
+  //     return journal
+  //   })
+  // },
   computed: {
     jurnalAmount: function() {
         let amount = this.tempJournal.num * this.tempJournal.unitPrice;
