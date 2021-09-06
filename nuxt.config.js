@@ -28,7 +28,7 @@ export default {
       { rel: 'stylesheet',href:'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap'}
     ],
     plugins: [
-      '~/plugins/firebase'
+      //'~/plugins/firebase'
     ],
     script: [
 			{ src: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js" },
@@ -42,7 +42,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/firebase'
+    '~/plugins/fireauth.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -54,11 +54,18 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    
+
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    
+
+  },
+
+  vendor: [
+    'firebase'
+  ],
+  router: {
+    middleware: 'router-auth'
   }
 }

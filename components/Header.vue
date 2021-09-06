@@ -18,8 +18,27 @@
           <li class="nav-item">
             <a class="nav-link" href="./forms/journal">日記帳</a>
           </li>
+          <li class="nav-item">
+            <button class="btn btn-primary" v-on:click="logout">登出</button>
+          </li>
         </ul>
       </div>
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  data() {
+    return {}
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('signOut').then(() => {
+        alert('logged out!')
+        this.$router.push('/')
+      })
+    }
+  },
+};
+</script>
