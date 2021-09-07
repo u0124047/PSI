@@ -7,10 +7,11 @@ export default (context) => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         console.log("登陸狀態")
-        return resolve(store.commit('setUser', user))
+        return resolve(store.dispatch('saveUser', user))
       }
       console.log("沒有登錄")
       return resolve()
     })
   })
 }
+

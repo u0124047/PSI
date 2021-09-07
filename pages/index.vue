@@ -28,7 +28,7 @@ export default {
         console.log("[Signed in]", this.formEmail);
       })
       .catch((error) => {
-        console.log(e.message);
+        console.log(error.message);
         const errorCode = error.code;
         const errorMessage = error.message;
       });

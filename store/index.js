@@ -1,33 +1,39 @@
-import Vuex from 'vuex'
 import firebase, {auth} from '@/services/fireinit.js'
 
-const createStore = () => {
-  return new Vuex.Store({
-    state: {
-      user: null
-    },
-    getters: {
-      activeUser: (state, getters) => {
-        return state.user
-      }
-    },
-    mutations: {
-      setUser (state, payload) {
-        state.user = payload
-      }
-    },
-    actions: {
-      autoSignIn ({commit}, payload) {
-        commit('setUser', payload)
-      },
+export const state = () => ({
+  user: null
+})
 
-      signOut ({commit}) {
-        auth.signOut().then(() => {
-          commit('setUser', null)
-        }).catch(err => console.log(error))
-      }
-    }
-  })
+export const getters = {
+  activeUser (state) {
+    return state.user
+  }
 }
 
-export default createStore
+export const mutations = {
+  setUser (state, payload) {
+    state.user = payload
+  },
+
+  ON_AUTH_STATE_CHANGED_MUTATION: (state, authUser) => {
+    const { uid, email, emailVerified } = authUser
+    state.user = { uid, email, emailVerified }
+  },
+}
+
+export const actions = {
+  saveUser ({commit}, payload) {
+    commit('ON_AUTH_STATE_CHANGED_MUTATION', payload)
+  },
+
+  autoSignIn ({commit}, payload) {
+    commit('setUser', payload)
+  },
+
+  signOut ({commit}) {
+    auth.signOut().then(() => {
+      commit('setUser', null)
+    }).catch(err => console.log(error))
+  }
+}
+
