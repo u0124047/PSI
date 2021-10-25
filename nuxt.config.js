@@ -46,6 +46,9 @@ export default {
   plugins: [
     '~/plugins/fireauth.js'
   ],
+  services: [
+    '~/services/fireinit.js'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -66,8 +69,5 @@ export default {
 
   vendor: [
     'firebase'
-  ],
-  router: {
-    middleware: 'router-auth'
-  }
+  ]
 }
