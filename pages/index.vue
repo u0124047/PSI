@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { auth } from '~/services/fireinit.js'
+// import { auth } from "~/services/fireinit.js";
 import Header from "~/components/Header.vue";
 export default {
   data() {
@@ -20,19 +20,23 @@ export default {
     }
   },
   methods: {
-    login () {
-      auth.signInWithEmailAndPassword(this.formEmail, this.formPassword)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log("[Signed in]", this.formEmail);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-    }
+    login() {
+      this.$store
+        .dispatch("auth/signInWithEmail", {
+          email: this.formEmail,
+          password: this.formPassword,
+        })
+        .then((data) => {
+          if (data.status === "success") {
+            const user = data.user;
+            console.log("[Signed in]", this.formEmail);
+          } else {
+            console.log(error.message);
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          }
+        });
+    },
   },
 };
 </script>
