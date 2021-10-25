@@ -252,7 +252,7 @@
 </template>
 
 <script>
-import { DB } from "@/services/fireinit.js";
+import { DB } from "~/services/fireinit.js";
 export default {
   head() {
     return {

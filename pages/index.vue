@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { auth } from '@/services/fireinit.js'
+import { auth } from '~/services/fireinit.js'
 import Header from "~/components/Header.vue";
 export default {
   data() {
