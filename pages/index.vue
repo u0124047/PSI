@@ -30,6 +30,7 @@ export default {
           if (data.status === "success") {
             const user = data.user;
             console.log("[Signed in]", this.formEmail);
+            this.$router.push('./forms/journal');
           } else {
             console.log(error.message);
             const errorCode = error.code;
