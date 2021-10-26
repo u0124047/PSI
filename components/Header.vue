@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="/">Vue.js 練習手冊</a>
+      <a class="navbar-brand" href="/">展虹日記帳</a>
       <button
         class="navbar-toggler"
         type="button"
