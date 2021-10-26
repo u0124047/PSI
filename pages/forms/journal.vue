@@ -68,6 +68,7 @@
                       <option value="大白料">大白料</option>
                       <option value="色料">色料</option>
                       <option value="垃圾袋">垃圾袋</option>
+                      <option value="結餘">結餘</option>
                     </select>
                   </td>
                   <td>
