@@ -17,7 +17,12 @@
           v-model="journalMonth"
           value="journalMonth"
         >
-          <option selected="selected" value="7">7月份</option>
+          <option value="12">12月份</option>
+          <option value="11">11月份</option>
+          <option selected="selected" value="10">10月份</option>
+          <option value="9">9月份</option>
+          <option value="8">8月份</option>
+          <option value="7">7月份</option>
           <option value="6">6月份</option>
           <option value="5">5月份</option>
           <option value="4">4月份</option>
@@ -262,7 +267,7 @@ export default {
   data() {
     return {
       journalYear: 110,
-      journalMonth: 7,
+      journalMonth: 10,
       journalDay: null,
       journals: [],
       tempJournal: {
