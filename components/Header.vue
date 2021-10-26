@@ -36,7 +36,7 @@ export default {
     logout () {
       this.$store.dispatch('signOut').then(() => {
         alert('logged out!')
-        this.$router.push('/')
+        window.location.href = '/'
       })
     }
   },
