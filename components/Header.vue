@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header style="width: 100%">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="/">展虹日記帳</a>
       <button
@@ -17,6 +17,9 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="./forms/journal">日記帳</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./product/daliyOutput">員工日生產</a>
           </li>
           <li class="nav-item">
             <button class="btn btn-primary" v-on:click="logout">登出</button>

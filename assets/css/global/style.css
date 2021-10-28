@@ -449,7 +449,51 @@
   .pre-scrollable {
     max-height: 340px;
     overflow-y: scroll; }
-  
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .wrap_main {
+    width: 100%;
+  }
+  .addOutputCard {
+    top: 0;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .addOutputCard .backgroud {
+    background: #959595;
+    opacity: 0.7;
+    width: 100vw;
+    height: 100vh;
+  }
+  .addOutputCard .msg_box {
+    position: absolute;
+    z-index: 99;
+    border-radius: 10px;
+    background: white;
+    opacity: 1;
+  } 
+  .addOutputCard .msg_box .msg_content {
+    padding: 24px 18px;
+  }
+  .addOutputCard .msg_box .msg_content .subTitle {
+    display: flex;
+    flex-direction: column;
+  }
+  .addOutputCard .msg_box .msg_content  .currentNew {
+    color: red;
+  }
+  .addOutputCard .msg_box .actions {
+    display: flex;
+  }
   .container {
     width: 100%;
     padding-right: 15px;
