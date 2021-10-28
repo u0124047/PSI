@@ -90,11 +90,11 @@
                 </div>
                 <hr>
                 <div><span style="font-size: 26px; color: blue;font-weight: bold;">{{output[selectedMember-1].name}}{{selectedColor}}</span> 新增重量：<span style="font-size: 26px; color: red;font-weight: bold;">{{tempWeight}}</span></div>
-                <div>員工<button style="width: 50px; height: 50px;" v-for="(item, index) in output" :key="index" @click="selectedMember = index+1">{{item.name}}</button></div>
-                <div>顏色<button style="width: 50px; height: 50px;" v-for="(color, color_index) in 4" :key="color_index" @click="selectedColor = color_index+1">{{color_index+1}}</button></div>
+                <div><button style="width: 25%; height: 50px;" v-for="(item, index) in output" :key="index" @click="selectedMember = index+1">{{item.name}}</button></div>
+                <div><button style="width: 25%; height: 50px;" v-for="(color, color_index) in 4" :key="color_index" @click="selectedColor = color_index+1">{{color_index+1}}</button></div>
                 <div class="subTitle">
-                    <div>十<button style="width: 32px; height: 50px;" v-for="(n,index) in 10" :key="index" @click="tempWeight=index*10">{{index}}</button></div>
-                    <div>個<button style="width: 32px; height: 50px;" v-for="(n,index) in 10" :key="index" @click="tempWeight=tempWeight+index">{{index}}</button></div>
+                    <div>十<button style="width: 60px; height: 50px;" v-for="(n,index) in 5" :key="index" @click="tempWeight=index*10">{{index}}</button></div>
+                    <div>個<button style="width: 60px; height: 50px;" v-for="(n,index) in 10" :key="index" @click="tempWeight=tempWeight+index">{{index}}</button></div>
                 </div>
             </div>
             <div class="actions">
