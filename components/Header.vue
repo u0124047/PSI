@@ -22,6 +22,9 @@
             <a class="nav-link" href="./product/daliyOutput">員工日生產</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="./gift">禮品區</a>
+          </li>
+          <li class="nav-item">
             <button class="btn btn-primary" v-on:click="logout">登出</button>
           </li>
         </ul>
