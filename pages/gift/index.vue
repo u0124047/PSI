@@ -153,7 +153,7 @@
               <tr v-for="(item, key, index) in gifts" :key="index">
                 <td>{{ item.no }}</td>
                 <td>
-                  <img :src="`../img/gift/${item.price}_${item.no}.jpg`" alt="" />
+                  <img :src="`./img/gift/${item.price}_${item.no}.jpg`" alt="" />
                 </td>
                 <td style="text-align: left; font-weight:700">{{ item.name }}</td>
                 <td style="text-align: left; font-weight:200"><p v-html="item.content"></p></td>
