@@ -153,7 +153,7 @@
               <tr v-for="(item, key, index) in gifts" :key="index">
                 <td>{{ item.no }}</td>
                 <td>
-                  <img :src="`/img/gift/${item.price}_${item.no}.jpg`" alt="" />
+                  <img :src="`../img/gift/${item.price}_${item.no}.jpg`" alt="" />
                 </td>
                 <td style="text-align: left; font-weight:700">{{ item.name }}</td>
                 <td style="text-align: left; font-weight:200"><p v-html="item.content"></p></td>
@@ -161,12 +161,12 @@
                 <td>{{ item.value }}</td>
                 <td>{{ item.note }}</td>
                 <td style="text-align: right">
-                  <a v-show="!checkLike(key)" @click="likeTheItem(key, true)"
-                    ><img src="/img/icon/heart.png" alt="" />
+                  <!-- <a v-show="!checkLike(key)" @click="likeTheItem(key, true)"
+                    ><img src="~/img/icon/heart.png" alt="" />
                   </a>
                   <a v-show="checkLike(key)" @click="likeTheItem(key, false)"
-                    ><img src="/img/icon/heart_red.png" alt="" />
-                  </a>
+                    ><img src="~/img/icon/heart_red.png" alt="" />
+                  </a> -->
                   <button
                     type="button"
                     class="close ml-auto"
