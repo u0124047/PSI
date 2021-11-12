@@ -131,6 +131,54 @@
               <li class="nav-item">
                 <a
                   class="nav-link"
+                  :class="{ active: visibility == 9991 }"
+                  @click="changeVisibility(9991)"
+                  >米其林</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  :class="{ active: visibility == 9992 }"
+                  @click="changeVisibility(9992)"
+                  >年菜</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  :class="{ active: visibility == 9993 }"
+                  @click="changeVisibility(9993)"
+                  >鴻海</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  :class="{ active: visibility == 9994 }"
+                  @click="changeVisibility(9994)"
+                  >王品</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  :class="{ active: visibility == 9995 }"
+                  @click="changeVisibility(9995)"
+                  >龍蝦</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  :class="{ active: visibility == 9996 }"
+                  @click="changeVisibility(9996)"
+                  >海底撈</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
                   :class="{ active: visibility == 9999 }"
                   @click="changeVisibility(9999)"
                   >我的最愛</a
@@ -150,7 +198,7 @@
                 <th>備註</th>
                 <th></th>
               </tr>
-              <tr v-for="(item, key, index) in gifts" :key="index">
+              <tr v-for="(item, key, index) in getGifts" :key="index">
                 <td>{{ item.no }}</td>
                 <td>
                   <img :src="`./img/gift/${item.price}_${item.no}.jpg`" alt="" />
@@ -279,7 +327,7 @@ export default {
     },
   },
   async fetch() {
-    if (this.visibility === 9999) {
+    if (this.visibility > 9000) {
       var data = DB.ref("Gift");
     } else if (this.visibility > 0) {
       var data = DB.ref("Gift").orderByChild("price").equalTo(this.visibility);
@@ -305,16 +353,41 @@ export default {
     // }
   },
   computed: {
-    // getGifts: function () {
-    //   if (this.visibility === 9999) {
-    //     return Object.values(this.gifts).filter((item, key, index) => {
-    //         console.log("item:"+key+"index:"+index)
-    //         return this.likes.indexOf(item) > -1
-    //     });
-    //   } else {
-    //     return this.gifts;
-    //   }
-    // },
+    getGifts: function () {
+      // if (this.visibility === 9999) {
+      //   return Object.values(this.gifts).filter((item, key, index) => {
+      //       console.log("item:"+key+"index:"+index)
+      //       return this.likes.indexOf(item.key) > -1
+      //   });
+      // } else 
+      if (this.visibility === 9996) {
+        return Object.values(this.gifts).filter((item) => {
+            return item.name.includes('海底撈')
+        });
+      } else if (this.visibility === 9995) {
+        return Object.values(this.gifts).filter((item) => {
+            return item.name.includes('龍蝦')
+        });
+      } else if (this.visibility === 9994) {
+        return Object.values(this.gifts).filter((item) => {
+            return item.name.includes('王品')
+        });
+      } else if (this.visibility === 9993) {
+        return Object.values(this.gifts).filter((item) => {
+            return item.name.includes('鴻海')
+        });
+      } else if (this.visibility === 9992) {
+        return Object.values(this.gifts).filter((item) => {
+            return item.name.includes('年菜')
+        });
+      } else if (this.visibility === 9991) {
+        return Object.values(this.gifts).filter((item) => {
+            return item.name.includes('米其林')
+        });
+      } else {
+        return this.gifts;
+      }
+    },
   },
 };
 </script>
