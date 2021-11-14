@@ -446,7 +446,7 @@ import { DB } from "~/services/fireinit.js";
 export default {
   head() {
     return {
-      title: "2022 春年菜伴手禮",
+      title: "2022新春伴手禮",
     };
   },
   data() {
