@@ -173,10 +173,10 @@
                 <td>{{ item.note }}</td> -->
                 <td style="text-align: right">
                   <a v-show="!checkLike(key)" @click="likeTheItem(key, true)"
-                    ><img src="/img/icon/heart.png" alt="" />
+                    >加入我的最愛
                   </a>
-                  <a v-show="checkLike(key)" @click="likeTheItem(key, false)"
-                    ><img src="/img/icon/heart_red.png" alt="" />
+                  <a v-show="checkLike(key)" @click="likeTheItem(key, false)" style="color:red;"
+                    >取消我的最愛
                   </a>
                   <!-- <button
                     type="button"
