@@ -108,6 +108,15 @@
                   >{{ category.title }}</a
                 >
               </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  :class="{ active: visibility == 9999 }"
+                  @click="changeVisibility(9999)"
+                  style="color: red"
+                  >我的最愛</a
+                >
+              </li>
             </ul>
           </div>
           <table class="table" id="datatable">
@@ -135,20 +144,40 @@
                   <p v-html="item.content"></p>
                 </td>
                 <td>
-                  <span v-show="item.price==1000" style="color:ForestGreen; font-weight: 500; font-size: 20px;">{{ item.price | currency }}</span>
-                  <span v-show="item.price==2000" style="color:DodgerBlue; font-weight: 500; font-size: 20px;">{{ item.price | currency }}</span>
-                  <span v-show="item.price==3000" style="color:DarkOrange; font-weight: 500; font-size: 20px;">{{ item.price | currency }}</span>
-                  <span v-show="item.price==5000" style="color:Tomato; font-weight: 500; font-size: 20px;">{{ item.price | currency }}</span>
+                  <span
+                    v-show="item.price == 1000"
+                    style="
+                      color: ForestGreen;
+                      font-weight: 500;
+                      font-size: 20px;
+                    "
+                    >{{ item.price | currency }}</span
+                  >
+                  <span
+                    v-show="item.price == 2000"
+                    style="color: DodgerBlue; font-weight: 500; font-size: 20px"
+                    >{{ item.price | currency }}</span
+                  >
+                  <span
+                    v-show="item.price == 3000"
+                    style="color: DarkOrange; font-weight: 500; font-size: 20px"
+                    >{{ item.price | currency }}</span
+                  >
+                  <span
+                    v-show="item.price == 5000"
+                    style="color: Tomato; font-weight: 500; font-size: 20px"
+                    >{{ item.price | currency }}</span
+                  >
                 </td>
                 <!-- <td>{{ item.value }}</td>
                 <td>{{ item.note }}</td> -->
-                <!-- <td style="text-align: right"> -->
-                  <!-- <a v-show="!checkLike(key)" @click="likeTheItem(key, true)"
-                    ><img src="~/img/icon/heart.png" alt="" />
+                <td style="text-align: right">
+                  <a v-show="!checkLike(key)" @click="likeTheItem(key, true)"
+                    ><img src="/img/icon/heart.png" alt="" />
                   </a>
                   <a v-show="checkLike(key)" @click="likeTheItem(key, false)"
-                    ><img src="~/img/icon/heart_red.png" alt="" />
-                  </a> -->
+                    ><img src="/img/icon/heart_red.png" alt="" />
+                  </a>
                   <!-- <button
                     type="button"
                     class="close ml-auto"
@@ -157,7 +186,7 @@
                   >
                     <span aria-hidden="true">&times;</span>
                   </button> -->
-                <!-- </td> -->
+                </td>
               </tr>
             </thead>
           </table>
@@ -282,11 +311,11 @@ export default {
       return this.likes.indexOf(key) > -1;
     },
     likeTheItem: function (key, value) {
-      if (value) {
-        this.likes.push(key);
-      } else {
+      if (this.likes.indexOf(key) > -1) {
         let index = this.likes.indexOf(key);
         this.likes.splice(index, 1);
+      } else {
+        this.likes.push(key);
       }
       sessionStorage.setItem("likes", this.likes);
       this.$nuxt.refresh();
@@ -319,35 +348,61 @@ export default {
     }
   },
   mounted() {
-    // if (!sessionStorage["likes"]) {
-    //   sessionStorage["likes"] = [];
-    // } else {
-    //   this.likes = sessionStorage["likes"].split(",");
-    // }
+    if (!sessionStorage["likes"]) {
+      sessionStorage["likes"] = [];
+    } else {
+      this.likes = sessionStorage["likes"].split(",");
+    }
   },
   computed: {
     getGifts: function () {
-      // if (this.visibility === 9999) {
-      //   return Object.values(this.gifts).filter((item, key, index) => {
-      //       console.log("item:"+key+"index:"+index)
-      //       return this.likes.indexOf(item.key) > -1
-      //   });
-      // } else
       switch (true) {
-        case this.visibility > 8000: 
-          return Object.values(this.gifts).filter((item) => {
+        case this.visibility == 9999:
+          let likes = this.likes;
+          Object.filter = function (mainObject, filterFunction) {
+            return Object.keys(mainObject)
+              .filter(function (ObjectKey) {
+                return filterFunction(mainObject[ObjectKey], ObjectKey);
+              })
+              .sort(function order(key1, key2) {
+                return likes.indexOf(key1) > likes.indexOf(key2) ? 1 : -1;
+              })
+              .reduce(function (result, ObjectKey) {
+                result[ObjectKey] = mainObject[ObjectKey];
+                return result;
+              }, {});
+          };
+          return Object.filter(this.gifts, function (gift, key) {
+            return likes.indexOf(key) > -1;
+          });
+          break;
+        case this.visibility > 8000:
+          Object.filter = function (mainObject, filterFunction) {
+            return Object.keys(mainObject)
+              .filter(function (ObjectKey) {
+                return filterFunction(mainObject[ObjectKey]);
+              })
+              .reduce(function (result, ObjectKey) {
+                result[ObjectKey] = mainObject[ObjectKey];
+                return result;
+              }, {});
+          };
+          var row = 0;
+          let categories = this.categories;
+          categories.forEach((element, index) => {
+            if (element.value === this.visibility) {
+              row = index;
+            }
+          });
+          return Object.filter(this.gifts, function (gift) {
             var value = 0;
-            var row = 0;
-            this.categories.forEach((element, index) => {
-              if (element.value === this.visibility) {
-                row = index;
-              }
+            let pattern = categories[row].words;
+            pattern.forEach(function (word) {
+              value =
+                value +
+                (gift.name.includes(word) || gift.content.includes(word));
             });
-            let pattern = this.categories[row].words;
-            pattern.forEach(function(word){
-              value = value + (item.name.includes(word) || item.content.includes(word));
-            });
-            return (value === 1)
+            return value === 1;
           });
           break;
         default:
