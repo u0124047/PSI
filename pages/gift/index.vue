@@ -96,305 +96,29 @@
                   >全部</a
                 >
               </li>
-              <li class="nav-item">
+              <li
+                class="nav-item"
+                v-for="(category, index) in categories"
+                :key="index"
+              >
                 <a
                   class="nav-link"
-                  :class="{ active: visibility == 1000 }"
-                  @click="changeVisibility(1000)"
-                  >1000</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 2000 }"
-                  @click="changeVisibility(2000)"
-                  >2000</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 3000 }"
-                  @click="changeVisibility(3000)"
-                  >3000</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 5000 }"
-                  @click="changeVisibility(5000)"
-                  >5000</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8001 }"
-                  @click="changeVisibility(8001)"
-                  >牛</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8002 }"
-                  @click="changeVisibility(8002)"
-                  >豬</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8003 }"
-                  @click="changeVisibility(8003)"
-                  >雞</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8004 }"
-                  @click="changeVisibility(8004)"
-                  >帝王蟹</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8005 }"
-                  @click="changeVisibility(8005)"
-                  >龍蝦</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8006 }"
-                  @click="changeVisibility(8006)"
-                  >燒肉</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8007 }"
-                  @click="changeVisibility(8007)"
-                  >海鮮</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8008 }"
-                  @click="changeVisibility(8008)"
-                  >烏魚子</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8009 }"
-                  @click="changeVisibility(8009)"
-                  >佛跳牆</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8010 }"
-                  @click="changeVisibility(8010)"
-                  >火鍋</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8011 }"
-                  @click="changeVisibility(8011)"
-                  >巧克力</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8012 }"
-                  @click="changeVisibility(8012)"
-                  >橄欖油</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8013 }"
-                  @click="changeVisibility(8013)"
-                  >麵</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8014 }"
-                  @click="changeVisibility(8014)"
-                  >酒</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8015 }"
-                  @click="changeVisibility(8015)"
-                  >茶</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8016 }"
-                  @click="changeVisibility(8016)"
-                  >素</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8017 }"
-                  @click="changeVisibility(8017)"
-                  >年菜</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8018 }"
-                  @click="changeVisibility(8018)"
-                  >禮盒</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 8019 }"
-                  @click="changeVisibility(8019)"
-                  >套餐</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9001 }"
-                  @click="changeVisibility(9001)"
-                  >鴻海</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9002 }"
-                  @click="changeVisibility(9002)"
-                  >王品</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9003 }"
-                  @click="changeVisibility(9003)"
-                  >米其林</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9004 }"
-                  @click="changeVisibility(9004)"
-                  >海底撈</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9005 }"
-                  @click="changeVisibility(9005)"
-                  >阿霞飯店</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9006 }"
-                  @click="changeVisibility(9006)"
-                  >黑毛屋</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9007 }"
-                  @click="changeVisibility(9007)"
-                  >喜來登</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9008 }"
-                  @click="changeVisibility(9008)"
-                  >老協珍</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9009 }"
-                  @click="changeVisibility(9009)"
-                  >寬心園</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9010 }"
-                  @click="changeVisibility(9010)"
-                  >鼎泰豐</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9011 }"
-                  @click="changeVisibility(9011)"
-                  >黑橋牌</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9012 }"
-                  @click="changeVisibility(9012)"
-                  >天香樓</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :class="{ active: visibility == 9013 }"
-                  @click="changeVisibility(9013)"
-                  >快車肉乾</a
+                  :class="{ active: visibility == category.value }"
+                  @click="changeVisibility(category.value)"
+                  >{{ category.title }}</a
                 >
               </li>
             </ul>
           </div>
           <table class="table" id="datatable">
             <thead>
+              <tr></tr>
               <tr>
                 <th style="width: 5%">No.</th>
-                <th style="width: 10%">商品圖片</th>
-                <th style="width: 20%">商品名稱</th>
-                <th style="width: 50%">商品內容</th>
+                <th style="width: 20%">商品圖片</th>
+                <th style="width: 25%">商品名稱</th>
+                <th style="width: 45%">商品內容</th>
                 <th style="width: 10%">價錢</th>
-                <th style="width: 5%"></th>
               </tr>
               <tr v-for="(item, key, index) in getGifts" :key="index">
                 <td>{{ item.no }}</td>
@@ -410,10 +134,15 @@
                 <td style="text-align: left; font-weight: 400">
                   <p v-html="item.content"></p>
                 </td>
-                <td>{{ item.price | currency }}</td>
-                <td>{{ item.value }}</td>
-                <td>{{ item.note }}</td>
-                <td style="text-align: right">
+                <td>
+                  <span v-show="item.price==1000" style="color:ForestGreen; font-weight: 500; font-size: 20px;">{{ item.price | currency }}</span>
+                  <span v-show="item.price==2000" style="color:DodgerBlue; font-weight: 500; font-size: 20px;">{{ item.price | currency }}</span>
+                  <span v-show="item.price==3000" style="color:DarkOrange; font-weight: 500; font-size: 20px;">{{ item.price | currency }}</span>
+                  <span v-show="item.price==5000" style="color:Tomato; font-weight: 500; font-size: 20px;">{{ item.price | currency }}</span>
+                </td>
+                <!-- <td>{{ item.value }}</td>
+                <td>{{ item.note }}</td> -->
+                <!-- <td style="text-align: right"> -->
                   <!-- <a v-show="!checkLike(key)" @click="likeTheItem(key, true)"
                     ><img src="~/img/icon/heart.png" alt="" />
                   </a>
@@ -428,12 +157,12 @@
                   >
                     <span aria-hidden="true">&times;</span>
                   </button> -->
-                </td>
+                <!-- </td> -->
               </tr>
             </thead>
           </table>
           <div class="card-footer d-flex justify-content-between">
-            <span>共有 {{ Object.values(gifts).length }} 筆</span>
+            <span>共有 {{ Object.values(getGifts).length }} 筆</span>
           </div>
         </div>
       </div>
@@ -451,6 +180,47 @@ export default {
   },
   data() {
     return {
+      categories: [
+        { title: "1000", value: 1000, words: [] },
+        { title: "2000", value: 2000, words: [] },
+        { title: "3000", value: 3000, words: [] },
+        { title: "5000", value: 5000, words: [] },
+
+        { title: "牛", value: 8001, words: ["牛"] },
+        { title: "豬", value: 8002, words: ["豬"] },
+        { title: "雞", value: 8003, words: ["雞"] },
+        { title: "帝王蟹", value: 8004, words: ["帝王蟹"] },
+        { title: "龍蝦", value: 8005, words: ["龍蝦"] },
+        { title: "燒肉", value: 8006, words: ["燒肉"] },
+        { title: "海鮮", value: 8007, words: ["海鮮", "魚"] },
+        { title: "烏魚子", value: 8008, words: ["烏魚子"] },
+        { title: "佛跳牆", value: 8009, words: ["佛跳牆"] },
+        { title: "火鍋", value: 8010, words: ["火鍋"] },
+        { title: "巧克力", value: 8011, words: ["巧克力"] },
+        { title: "橄欖油", value: 8012, words: ["橄欖油"] },
+        { title: "麵", value: 8013, words: ["麵"] },
+        { title: "酒", value: 8014, words: ["酒"] },
+        { title: "茶", value: 8015, words: ["紅茶", "烏龍茶"] },
+        { title: "素", value: 8016, words: ["素"] },
+        { title: "年菜", value: 8017, words: ["年菜"] },
+        { title: "禮盒", value: 8018, words: ["禮盒", "禮箱"] },
+        { title: "套餐", value: 8019, words: ["套餐"] },
+
+        { title: "鴻海", value: 9001, words: ["鴻海"] },
+        { title: "王品", value: 9002, words: ["王品", "石二鍋", "青花驕"] },
+        { title: "米其林", value: 9003, words: ["米其林"] },
+        { title: "海底撈", value: 9004, words: ["海底撈"] },
+        { title: "阿霞飯店", value: 9005, words: ["阿霞飯店"] },
+        { title: "黑毛屋", value: 9006, words: ["黑毛屋"] },
+        { title: "喜來登", value: 9007, words: ["喜來登"] },
+        { title: "老協珍", value: 9008, words: ["老協珍"] },
+        { title: "寬心園", value: 9009, words: ["寬心園"] },
+        { title: "鼎泰豐", value: 9010, words: ["鼎泰豐"] },
+        { title: "黑橋牌", value: 9011, words: ["黑橋牌"] },
+        { title: "天香樓", value: 9012, words: ["天香樓"] },
+        { title: "快車肉乾", value: 9013, words: ["快車肉乾"] },
+      ],
+
       likes: [],
       gifts: [],
       tempGift: {
@@ -532,9 +302,7 @@ export default {
     },
   },
   async fetch() {
-    if (this.visibility > 8000) {
-      var data = DB.ref("Gift");
-    } else if (this.visibility > 0) {
+    if (this.visibility > 0 && this.visibility < 8000) {
       var data = DB.ref("Gift").orderByChild("price").equalTo(this.visibility);
     } else {
       var data = DB.ref("Gift");
@@ -565,204 +333,21 @@ export default {
       //       return this.likes.indexOf(item.key) > -1
       //   });
       // } else
-      switch (this.visibility) {
-        case 8001:
+      switch (true) {
+        case this.visibility > 8000: 
           return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("牛") || item.content.includes("牛");
-          });
-          break;
-        case 8002:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("豬") || item.content.includes("豬");
-          });
-          break;
-        case 8003:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("雞") || item.content.includes("雞");
-          });
-          break;
-        case 8004:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("帝王蟹") || item.content.includes("帝王蟹")
-            );
-          });
-          break;
-        case 8005:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("龍蝦") || item.content.includes("龍蝦");
-          });
-          break;
-        case 8006:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("燒肉") || item.content.includes("燒肉");
-          });
-          break;
-        case 8007:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("海鮮") || item.content.includes("海鮮") || item.name.includes("魚") || item.content.includes("魚")
-            );
-          });
-          break;
-        case 8008:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("烏魚子") || item.content.includes("烏魚子")
-            );
-          });
-          break;
-        case 8009:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("佛跳牆") || item.content.includes("佛跳牆")
-            );
-          });
-          break;
-        case 8010:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("火鍋") || item.content.includes("火鍋");
-          });
-          break;
-        case 8011:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("巧克力") || item.content.includes("巧克力")
-            );
-          });
-          break;
-        case 8012:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("橄欖油") || item.content.includes("橄欖油")
-            );
-          });
-          break;
-        case 8013:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("麵") || item.content.includes("麵");
-          });
-          break;
-        case 8014:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("酒") || item.content.includes("酒");
-          });
-          break;
-        case 8015:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("茶") || item.content.includes("茶") || item.name.includes("烏龍") || item.content.includes("烏龍")
-            );
-          });
-          break;
-        case 8016:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("素") || item.content.includes("素");
-          });
-          break;
-        case 8017:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("年菜") || item.content.includes("年菜");
-          });
-          break;
-        case 8018:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("禮盒") || item.content.includes("禮盒") || item.name.includes("禮箱") || item.content.includes("禮箱")
-            );
-          });
-          break;
-        case 8019:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("套餐") || item.content.includes("套餐");
-          });
-          break;
-        case 9001:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("鴻海") || item.content.includes("鴻海");
-          });
-          break;
-        case 9002:
-          return Object.values(this.gifts).filter((item) => {
-            return item.name.includes("王品") || item.content.includes("王品") || item.name.includes("石二鍋") || item.content.includes("石二鍋");
-          });
-          break;
-        case 9003:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("米其林") || item.content.includes("米其林")
-            );
-          });
-          break;
-        case 9004:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("海底撈") || item.content.includes("海底撈")
-            );
-          });
-          break;
-        case 9005:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("阿霞飯店") || item.content.includes("阿霞飯店")
-            );
-          });
-          break;
-        case 9006:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("黑毛屋") || item.content.includes("黑毛屋")
-            );
-          });
-          break;
-        case 9007:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("喜來登") || item.content.includes("喜來登")
-            );
-          });
-          break;
-        case 9008:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("老協珍") || item.content.includes("老協珍")
-            );
-          });
-          break;
-        case 9009:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("寬心園") || item.content.includes("寬心園")
-            );
-          });
-          break;
-        case 9010:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("鼎泰豐") || item.content.includes("鼎泰豐")
-            );
-          });
-          break;
-        case 9011:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("黑橋牌") || item.content.includes("黑橋牌")
-            );
-          });
-          break;
-        case 9012:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("天香樓") || item.content.includes("天香樓")
-            );
-          });
-          break;
-        case 9013:
-          return Object.values(this.gifts).filter((item) => {
-            return (
-              item.name.includes("快車肉乾") ||
-              item.content.includes("快車肉乾")
-            );
+            var value = 0;
+            var row = 0;
+            this.categories.forEach((element, index) => {
+              if (element.value === this.visibility) {
+                row = index;
+              }
+            });
+            let pattern = this.categories[row].words;
+            pattern.forEach(function(word){
+              value = value + (item.name.includes(word) || item.content.includes(word));
+            });
+            return (value === 1)
           });
           break;
         default:
