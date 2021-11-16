@@ -175,7 +175,10 @@
                   <a v-show="!checkLike(key)" @click="likeTheItem(key, true)"
                     >加入我的最愛
                   </a>
-                  <a v-show="checkLike(key)" @click="likeTheItem(key, false)" style="color:red;"
+                  <a
+                    v-show="checkLike(key)"
+                    @click="likeTheItem(key, false)"
+                    style="color: red"
                     >取消我的最愛
                   </a>
                   <!-- <button
@@ -195,6 +198,7 @@
           </div>
         </div>
       </div>
+      <button @click="topFunction" id="topBtn" title="TOP">Top</button>
     </div>
   </div>
 </template>
@@ -329,6 +333,18 @@ export default {
     refreshJournals() {
       this.$fetch();
     },
+    scrollFunction() {
+      var topbutton = document.getElementById("topBtn");
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        topbutton.style.display = "block";
+      } else {
+        topbutton.style.display = "none";
+      }
+    },
+    topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
   },
   async fetch() {
     if (this.visibility > 0 && this.visibility < 8000) {
@@ -354,6 +370,12 @@ export default {
       this.likes = sessionStorage["likes"].split(",");
     }
   },
+  beforeMount () {
+    window.addEventListener('scroll', this.scrollFunction);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.scrollFunction);
+  },
   computed: {
     getGifts: function () {
       switch (true) {
@@ -372,10 +394,9 @@ export default {
                 return result;
               }, {});
           };
-          return Object.filter(this.gifts, function (gift, key) {
+          return Object.filter(this.gifts, function (_, key) {
             return likes.indexOf(key) > -1;
           });
-          break;
         case this.visibility > 8000:
           Object.filter = function (mainObject, filterFunction) {
             return Object.keys(mainObject)
@@ -404,10 +425,8 @@ export default {
             });
             return value === 1;
           });
-          break;
         default:
           return this.gifts;
-          break;
       }
     },
   },
