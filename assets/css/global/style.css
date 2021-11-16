@@ -2844,6 +2844,8 @@
     padding-left: 0;
     margin-bottom: 0;
     list-style: none; }
+  .nav_date>* {
+    flex: 0 0 14.2857%;}
   
   .nav-link {
     display: block;
@@ -2870,8 +2872,9 @@
     .nav-tabs .nav-link.active,
     .nav-tabs .nav-item.show .nav-link {
       color: #495057;
-      background-color: #fff;
-      border-color: #dee2e6 #dee2e6 #fff; }
+      background-color: white;
+      border-color: #4fc08d; 
+      border-width: 2px;}
     .nav-tabs .dropdown-menu {
       margin-top: -1px;
       border-top-left-radius: 0;
@@ -6613,4 +6616,8 @@
     cursor: pointer;
     padding: 15px;
     border-radius: 4px;
+  }
+  .isToday {
+    color: red;
+    font-weight: 700;
   }

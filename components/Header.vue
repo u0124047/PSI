@@ -19,7 +19,7 @@
             <a class="nav-link" href="./forms/journal">日記帳</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./product/daliyOutput">員工日生產</a>
+            <a class="nav-link" href="./product/dailyOutput">員工日生產</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./gift">禮品區</a>

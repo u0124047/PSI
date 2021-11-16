@@ -368,7 +368,7 @@ export default {
     },
   },
   created() {
-    console.log("created")
+    this.refreshJournals();
   },
   async fetch() {
     if (this.visibility > 0) {
