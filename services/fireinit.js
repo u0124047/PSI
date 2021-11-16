@@ -3,7 +3,7 @@ import 'firebase/auth'
 import 'firebase/database'
 
 let config = {
-  apiKey: "AIzaSyAUHjJGgTh5tBbRCAjmjhllORJHqXSrZOA",
+  apiKey: "AIzaSyAsy6VJQt_jJZNuozgH1S87F1iOMr3IGgE",
   databaseURL: "https://purchasesalesinventory-default-rtdb.asia-southeast1.firebasedatabase.app",
 }
 
