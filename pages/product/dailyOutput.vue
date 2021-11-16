@@ -265,7 +265,7 @@ import { DB } from "~/services/fireinit.js";
 export default {
   head() {
     return {
-      title: "日記帳",
+      title: "員工日生產紀錄",
     };
   },
   data() {
