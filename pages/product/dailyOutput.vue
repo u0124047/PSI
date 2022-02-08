@@ -9,7 +9,8 @@
           v-model="selectedYear"
           value="selectedYear"
         >
-          <option selected="selected" value="2021">2021年</option>
+          <option selected="selected" value="2022">2022年</option>
+          <option value="2021">2021年</option>
         </select>
         <select
           id="selectMonth"
@@ -18,7 +19,7 @@
           value="selectedMonth"
         >
           <option value="12">12月份</option>
-          <option selected="selected" value="11">11月份</option>
+          <option value="11">11月份</option>
           <option value="10">10月份</option>
           <option value="9">9月份</option>
           <option value="8">8月份</option>
@@ -28,7 +29,7 @@
           <option value="4">4月份</option>
           <option value="3">3月份</option>
           <option value="2">2月份</option>
-          <option value="1">1月份</option>
+          <option selected="selected" value="1">1月份</option>
         </select>
         <button class="btn btn-primary" type="button" @click="refreshOutput">
           查詢
@@ -271,8 +272,8 @@ export default {
   data() {
     return {
       today: { year: 0, month: 0, day: 0, dayOfWeek: 0 },
-      selectedYear: 110,
-      selectedMonth: 11,
+      selectedYear: 111,
+      selectedMonth: 1,
       selectedDay: 1,
       selectedMember: 1,
       selectedColor: 1,
