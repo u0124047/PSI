@@ -9,6 +9,7 @@
           v-model="journalYear"
           value="journalYear"
         >
+          <option selected="selected" value="111">111年度</option>
           <option selected="selected" value="110">110年度</option>
         </select>
         <select
@@ -19,7 +20,7 @@
         >
           <option value="12">12月份</option>
           <option value="11">11月份</option>
-          <option selected="selected" value="10">10月份</option>
+          <option value="10">10月份</option>
           <option value="9">9月份</option>
           <option value="8">8月份</option>
           <option value="7">7月份</option>
@@ -28,7 +29,7 @@
           <option value="4">4月份</option>
           <option value="3">3月份</option>
           <option value="2">2月份</option>
-          <option value="1">1月份</option>
+          <option selected="selected" value="1">1月份</option>
         </select>
         <button class="btn btn-primary" type="button" @click="refreshJournals">
           查詢
@@ -267,8 +268,8 @@ export default {
   },
   data() {
     return {
-      journalYear: 110,
-      journalMonth: 10,
+      journalYear: 111,
+      journalMonth: 1,
       journalDay: null,
       journals: [],
       tempJournal: {
