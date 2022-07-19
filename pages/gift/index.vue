@@ -141,7 +141,7 @@
                   {{ item.name }}
                 </td>
                 <td style="text-align: left; font-weight: 400">
-                  <p v-html="item.content"></p>
+                  <p>{{item.content}}</p>
                 </td>
                 <td>
                   <span
